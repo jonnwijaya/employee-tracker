@@ -153,8 +153,8 @@ function addRole() {
 
 function addEmployee() {
     inquirer.prompt(addingEmployee).then((addEmployeeResponse) => {
-        const sql = `INSERT INTO employee (first_name, last_name) VALUES (?, ?)`;
-        const params = [addEmployeeResponse.firstName, addEmployeeResponse.lastName];
+        const sql = `INSERT INTO employee (id, first_name, last_name) VALUES (?, ?, ?)`;
+        const params = [addEmployeeResponse.employeeId, addEmployeeResponse.firstName, addEmployeeResponse.lastName];
         db.query(sql, params, (err, result) => {
             if (err) {
                 console.error(err);
@@ -198,6 +198,11 @@ const addingRole = [
 ];
 
 const addingEmployee = [
+    {
+        type: 'input',
+        name: 'employeeId',
+        message: 'What is the employees ID?',
+    },
     {
         type: 'input',
         name: 'firstName',
